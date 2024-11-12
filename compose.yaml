@@ -1,0 +1,28 @@
+name: proxyserver
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:5000"
+    environment:
+      - ENV=production
+    networks:
+      - proxynet
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5" # Limits CPU to 50% of a core
+          memory: "512M" # Restricts memory usage to 512MB
+      replicas: 1 # Can scale up if needed in production
+
+networks:
+  proxynet: {}
