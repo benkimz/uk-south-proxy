@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_fedfbd3e0c604b88883bfbdde1ac1482 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}
+        tags: benkimz/uk-south:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'uk-south'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_fb6005e91a2f4ec3a71a1d01f55defcd }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_fedfbd3e0c604b88883bfbdde1ac1482 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}'
+        images: 'benkimz/uk-south:${{ github.sha }}'
